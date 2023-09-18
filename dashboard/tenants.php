@@ -1,59 +1,46 @@
 <?php
-// Include your database connection file (e.g., dbcon.php)
 include '../dbcon.php';
 
-// Check if a tenant ID is provided for password reset
 if (isset($_POST['resetPassword'])) {
     $tenantID = $_POST['tenantID'];
     $newPassword = $_POST['newPassword'];
-
-    // Implement your password reset logic here
     $query = "UPDATE tenants SET tenantPassword = ? WHERE tenantID = ?";
     $stmt = $con->prepare($query);
     $stmt->bind_param("si", $newPassword, $tenantID);
 
     if ($stmt->execute()) {
-        // Password reset successful, you can display a success message here
         echo "<script>alert('Password reset successful.');</script>";
     } else {
-        // Password reset failed, you can display an error message here
         echo "<script>alert('Password reset failed.');</script>";
     }
 }
 
-// Perform a database query to retrieve tenant data
-$query = "SELECT * FROM tenants"; // Modify this query as needed
+$query = "SELECT * FROM tenants"; 
 $result = $con->query($query);
 
-// Check if the query was successful
 if (!$result) {
     echo "Error: " . $con->error;
-    // Handle the error appropriately (e.g., log it or show an error message)
-    exit(); // Exit the script if an error occurs
+    exit();
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Include your CSS and JavaScript files here -->
     <link rel="stylesheet" href="your-css-file.css">
     <style>
-/* Reset any default margin and padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Set the background color to white and text color to black */
 body {
     background-color: white;
     color: black;
     font-family: Arial, sans-serif;
 }
 
-/* Style the tenant container */
 .tenant-container {
     border: 1px solid #ddd;
     padding: 20px;
@@ -63,7 +50,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Style the tenant details */
 .tenant h2 {
     margin-top: 0;
 }
@@ -72,7 +58,6 @@ body {
     margin: 5px 0;
 }
 
-/* Style the payment table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -85,7 +70,6 @@ table th, table td {
     text-align: left;
 }
 
-/* Style the Actions buttons */
 form {
     display: inline-block;
     margin-right: 5px;
@@ -108,7 +92,6 @@ form button {
     font-weight: bold;
 }
 
-/* Style the success and error messages */
 .success-message, .error-message {
     margin-top: 10px;
     padding: 10px;
@@ -123,7 +106,6 @@ form button {
     background-color: #dc3545;
 }
 
-/* Header styles */
 header {
     background-color: #2ecc71;
     color: #fff;
@@ -165,7 +147,6 @@ header:hover {
 </head>
 <body>
     <header>
-        <!-- Owner header content -->
         <div class="owner-header">
             <h1>List of Tenants</h1><br><br>
             <a href="../dashboard/owner_dashboard.php">Dashboard</a>
@@ -174,13 +155,10 @@ header:hover {
     </header>
 
     <section class="container">
-        <!-- Tenant details go here -->
         <?php
         while ($row = $result->fetch_assoc()) {
-            // Start a new container for each tenant
             echo "<div class='tenant-container'>";
             
-            // Tenant details
             echo "<div class='tenant'>";
             echo "<h2>Tenant Details</h2>";
             echo "<p><strong>Name:</strong> " . $row["tenantName"] . "</p>";
@@ -189,22 +167,18 @@ header:hover {
             echo "<p><strong>Rent Amount:</strong> $" . $row["amountToBePaid"] . "</p>";
             echo "</div>";
 
-            // Tenant payment table
             echo "<table>";
             echo "<thead>";
             echo "<tr>";
             echo "<th>Date</th>";
             echo "<th>Amount</th>";
             echo "<th>Description</th>";
-            echo "<th>Actions</th>"; // Added Actions column
+            echo "<th>Actions</th>"; 
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
 
-            // Move the $tenantID assignment here
             $tenantID = $row["tenantID"];
-
-            // Query for payments for each tenant
             $paymentQuery = "SELECT * FROM payments WHERE tenantID = ?";
             $paymentStmt = $con->prepare($paymentQuery);
             $paymentStmt->bind_param("i", $tenantID);
@@ -218,14 +192,12 @@ header:hover {
                 echo "<td>" . $paymentRow["description"] . "</td>";
                 echo "<td>";
                 
-                // Reset Password Form
                 echo "<form action='tenants.php' method='post'>";
                 echo "<input type='hidden' name='tenantID' value='" . $tenantID . "'>";
                 echo "<input type='password' name='newPassword' placeholder='New Password' required>";
                 echo "<button type='submit' name='resetPassword'>Reset Password</button>";
                 echo "</form>";
                 
-                // Delete Form
                 echo "<form action='tenants.php' method='post'>";
                 echo "<input type='hidden' name='tenantID' value='" . $tenantID . "'>";
                 echo "<button type='submit' name='deleteTenant'>Delete</button>";
@@ -238,7 +210,6 @@ header:hover {
             echo "</tbody>";
             echo "</table>";
 
-            // End of tenant container
             echo "</div>";
         }
         ?>

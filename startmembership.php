@@ -48,15 +48,15 @@ if(isset($_POST['startmembershipbtn']))
 <body>
     <header>
         <div class="nav container">
-         <a href="index.php" class="logo"><i class='bx bx-home'></i>Tenant Management System</a>
-        
+            <a href="index.php" class="logo"><i class='bx bx-home'></i>Tenant Management System</a>
             <a href="owner_login.php" class="btn">Owner Login</a>
         </div>
     </header>
-
         <section class="startmembership container">
             <div class="apartmentDetails">
                 <form action="" method="post">
+                    <h4>Welcome</h4>
+                    <br><br><br><br><br>
                         <h2>Apartment Details</h2>
                         <label for="apartment_name">Name of the Apartment: </label>
                         <input type="text" name="apartment_name" required><br>

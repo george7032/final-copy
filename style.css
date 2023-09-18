@@ -314,7 +314,6 @@ header {
 }
 
 
-/* Log IN */
 .login {
   display: grid;
   grid-template-columns: 0.4fr 1fr;
@@ -390,7 +389,6 @@ header {
 }
 
 
-/* Making the login page Responsive */
 @media (max-width: 1080px) {
   .container {
     margin-left: 1rem;
@@ -542,7 +540,6 @@ header {
   margin-bottom: 15px;
 }
 
-/* Dashboard buttons */
 .dashboard-buttons {
   display: flex;
   justify-content: space-between;
@@ -563,7 +560,6 @@ header {
   border-radius: 5px;
 }
 
-/* Table styles */
 .table-container {
   overflow-x: auto;
   margin-top: 20px;
@@ -587,7 +583,6 @@ th {
   background-color: #f0f0f0;
 }
 
-/* Status indicators */
 .status-paid {
   color: #008000;
   font-weight: bold;
@@ -598,13 +593,11 @@ th {
   font-weight: bold;
 }
 
-/* Tenant Dashboard */
 .welcome-msg {
   margin-left: auto;
   font-weight: bold;
 }
 
-/* Form styles */
 .form-inline {
   display: flex;
   justify-content: space-between;
@@ -632,7 +625,6 @@ th {
 }
 
 
-/* Reset default browser styles */
 body, h1, h2, h3, p, ul, li, form, input, select {
   margin: 0;
   padding: 0;
@@ -641,10 +633,9 @@ body, h1, h2, h3, p, ul, li, form, input, select {
   font-family: Arial, sans-serif;
 }
 
-/* Global Styles */
 body {
-  background-color: #ffffff; /* White background */
-  color: #333333; /* Dark text color */
+  background-color: #ffffff; 
+  color: #333333; 
 }
 
 .container {
@@ -653,11 +644,10 @@ body {
   padding: 20px;
 }
 
-/* Header Styles */
 header {
-  background-color: #00a859; /* Green header background */
+  background-color: #00a859; 
   padding: 10px 0;
-  color: #ffffff; /* White text color */
+  color: #ffffff; 
 }
 
 .logo {
@@ -675,31 +665,29 @@ header {
 .btn {
   display: inline-block;
   padding: 8px 16px;
-  background-color: #ffffff; /* White button background */
-  color: #00a859; /* Green button text color */
-  border: 2px solid #00a859; /* Green button border */
+  background-color: #ffffff; 
+  color: #00a859; 
+  border: 2px solid #00a859; 
   border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .btn:hover {
-  background-color: #00a859; /* Green button background on hover */
-  color: #ffffff; /* White button text color on hover */
+  background-color: #00a859; 
+  color: #ffffff; 
 }
 
-/* Start Membership Section */
 .startmembership {
   padding: 40px 0;
 }
 
 .apartmentDetails, .units, .ownerDetails {
   padding: 20px;
-  border: 1px solid #dddddd; /* Light gray border */
+  border: 1px solid #dddddd; 
   border-radius: 4px;
   margin-bottom: 20px;
 }
-/* Style the number of units dropdowns */
 select {
   width: 100%;
   padding: 10px;
@@ -709,7 +697,6 @@ select {
   margin-bottom: 10px;
 }
 
-/* Style the labels for the dropdowns */
 label {
   font-size: 18px;
   font-weight: bold;
@@ -733,11 +720,10 @@ label {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
-  border: 1px solid #dddddd; /* Light gray border */
+  border: 1px solid #dddddd; 
   border-radius: 4px;
 }
 
-/* Style the submit button */
 button[type="submit"] {
   background-color: #00a859;
   color: #fff;
@@ -745,14 +731,13 @@ button[type="submit"] {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Add color transition */
+  transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 button[type="submit"]:hover {
-  background-color: #72dfbe; /* Change background color on hover */
-  color: #00a859; /* Change text color on hover */
+  background-color: #72dfbe; 
+  color: #00a859; 
 }
-/* Add this CSS rule to style the success message */
 #successMessage {
   color: lightgreen;
   font-size: 18px;
@@ -762,9 +747,8 @@ button[type="submit"]:hover {
 
 
 
-/* Footer Styles */
 .footer {
-  background-color:#00a859; /* Light gray footer background */
+  background-color:#00a859;
   padding: 20px 0;
 }
 
@@ -787,13 +771,13 @@ button[type="submit"]:hover {
 .footer-box a {
   display: block;
   margin-bottom: 5px;
-  color: #333333; /* Dark text color */
+  color: #333333;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-box a:hover {
-  color: #00a859; /* Green text color on hover */
+  color: #00a859; 
 }
 
 .social {
@@ -802,12 +786,12 @@ button[type="submit"]:hover {
 
 .social a {
   margin-right: 10px;
-  color: #00a859; /* Green social media icon color */
+  color: #00a859;
   text-decoration: none;
   font-size: 24px;
 }
 
-/* CSS for add_tenant.php */
+
 
 body {
   font-family: Arial, sans-serif;
@@ -909,4 +893,3 @@ button[type="submit"]:hover {
   background-color: #00cc99;
 }
 
-/* Add more CSS rules here to style the form as needed */

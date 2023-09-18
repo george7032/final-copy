@@ -25,9 +25,7 @@ if(isset($_POST["ownerSubmit"])){
     }
 
 }
-// After verifying credentials and before redirecting
 if ($row['username'] == $username && $row['password'] == $password) {
-    // Set the apartmentID in the session
     $_SESSION['apartmentID'] = $row['apartmentID'];
     $_SESSION['login'] = true;
     header("location: owner_dashboard.php");

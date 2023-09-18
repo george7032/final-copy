@@ -1,16 +1,14 @@
 <?php
 session_start();
 if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
-    header("location: ../owner_login.php"); // Redirect to the login page if not logged in
+    header("location: ../owner_login.php"); 
     exit();
 }
 
-include("../dbcon.php"); // Adjust the path as needed
+include("../dbcon.php"); 
 
-// Fetch owner-specific data from the database
+
 $ownerID = $_SESSION["id"];
-// Query the database to retrieve owner-specific information
-// Replace 'owners' with your actual owner table name and columns
 $query = "SELECT * FROM owners WHERE id = ?";
 $stmt = $con->prepare($query);
 $stmt->bind_param("i", $ownerID);
@@ -20,12 +18,10 @@ $result = $stmt->get_result();
 if ($result->num_rows === 1) {
     $ownerData = $result->fetch_assoc();
 } else {
-    // Handle the case where owner data is not found (should not happen if session is valid)
     header("location: ../owner_login.php");
     exit();
 }
 
-// Include any necessary CSS or JavaScript files
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +31,6 @@ if ($result->num_rows === 1) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maintenance</title>
-    <!-- Include your CSS and JavaScript files here -->
 </head>
 <body>
     <header>
@@ -48,9 +43,7 @@ if ($result->num_rows === 1) {
 
     <section class="container">
         <h2>Maintenance</h2>
-        <!-- Implement a chat space for communication with tenants -->
         <div class="chat-container">
-            <!-- Display chat messages here -->
         </div>
         <form id="chat-form">
             <input type="text" id="message" placeholder="Type your message..." required>
@@ -58,6 +51,5 @@ if ($result->num_rows === 1) {
         </form>
     </section>
 
-    <!-- Include your JavaScript for handling chat functionality -->
 </body>
 </html>

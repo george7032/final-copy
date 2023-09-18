@@ -7,7 +7,6 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
 
 include('../dbcon.php');
 
-// Authenticate owner and retrieve apartmentID
 $ownerID = $_SESSION['id'];
 $query = "SELECT apartmentID FROM owners WHERE ownerID = ?";
 $stmt = $con->prepare($query);
@@ -16,7 +15,7 @@ $stmt->execute();
 $stmt->bind_result($apartmentID);
 
 if ($stmt->fetch()) {
-    $_SESSION['apartmentID'] = $apartmentID; // Set apartmentID in the session
+    $_SESSION['apartmentID'] = $apartmentID; 
 }
 $stmt->close();
 ?>
@@ -32,8 +31,6 @@ $stmt->close();
 </head>
 <body>
     <style>
-        /* CSS for owner_dashboard.php */
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -95,7 +92,6 @@ header {
     background-color: #00cc99;
 }
 
-/* Add more CSS rules here to style your dashboard sections as needed */
 
 
     </style>
@@ -103,39 +99,29 @@ header {
 
     <section class="dashboard container" id="dashboard">
         <h1>Dashboard</h1>
-        <!-- Add content for the dashboard, e.g., property info, rent summary by month, etc. -->
-        <!-- Example: -->
+
         <div class="property-info">
             <h2>Property Information</h2>
-            <!-- Display property information here -->
         </div>
         <div class="rent-summary">
             <h2>Rent Summary</h2>
-            <!-- Display rent summary by month here -->
         </div>
     </section>
 
     <section class="payments container">
-        <!-- Add content for the Payments section -->
         <h1>Payments</h1>
-        <!-- Example: List of payment invoices -->
     </section>
 
     <section class="maintenance container">
-        <!-- Add content for the Maintenance section -->
         <h1>Maintenance</h1>
-        <!-- Example: Chat space for maintenance requests -->
     </section>
 
     <section class="tenants container">
         <h1>Tenants</h1>
-        <!-- Display a list of tenants with links to their profiles -->
-        <a href="add_tenant.php" class="btn">Add Tenant</a> <!-- Link to the Add Tenant page -->
-        <!-- Example: -->
+        <a href="add_tenant.php" class="btn">Add Tenant</a> 
         <ul>
             <li><a href="tenant_profile.php?id=1">Tenant 1</a></li>
             <li><a href="tenant_profile.php?id=2">Tenant 2</a></li>
-            <!-- Add more tenant entries here -->
         </ul>
     </section>
 <?php include ('../includes/footer.php');?>

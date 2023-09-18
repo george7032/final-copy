@@ -1,4 +1,5 @@
-<?php include('includes/header.php');?>    
+<?php include('includes/header.php');?>
+<br><br>    
     <section class="home container" id="home">
         <div class="home-text">
             <h1>Best Tenant Management<br>System for your<br>Apartment.</h1>
@@ -11,6 +12,7 @@
         <div class="about-img">
             <img src="img/about.jpg" alt="">
         </div>
+
         <div class="about-text">
             <span><b>About Us</b></span>
             <h2>We Provide The Best <br>Management For You !</h2>

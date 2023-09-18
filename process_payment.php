@@ -43,8 +43,6 @@ header {
     color: white;
     padding: 20px 0;
 }
-
-/* Container */
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -54,7 +52,6 @@ header {
     border-radius: 5px;
 }
 
-/* Form Styles */
 h2 {
     color: #00563F;
 }
@@ -92,8 +89,6 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #00cc99;
 }
-
-/* Adjust your other styles as needed */
 
     </style>
     <header>

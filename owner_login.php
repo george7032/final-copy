@@ -2,15 +2,10 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Include your database connection here
     include("dbcon.php");
 
     $ownerEmail = $_POST["ownerEmail"];
     $ownerPassword = $_POST["ownerPassword"];
-
-    // Perform input validation here if needed
-
-    // Query the database to check owner credentials
     $query = "SELECT * FROM owners WHERE ownerEmail = ? AND ownerPassword = ?";
     $stmt = $con->prepare($query);
     $stmt->bind_param("ss", $ownerEmail, $ownerPassword);
@@ -18,24 +13,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
-        // Owner authentication successful
         $row = $result->fetch_assoc();
-
-        // Store owner information in the session
         $_SESSION["login"] = true;
         $_SESSION["ownerID"] = $row["ownerID"];
         $_SESSION["apartmentID"] = $row["apartmentID"];
         $_SESSION["ownerName"] = $row["ownerName"];
-
-        // Redirect to the owner dashboard or any other desired page
         header("location: dashboard/owner_dashboard.php");
         exit();
     } else {
-        // Authentication failed
         $error_message = "Invalid credentials. Please try again.";
     }
 
-    // Close the database connection
     $stmt->close();
     $con->close();
 }

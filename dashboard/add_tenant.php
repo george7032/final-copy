@@ -2,7 +2,6 @@
 session_start();
 include('../dbcon.php');
 
-// Check if the owner is logged in and if apartmentID is set in the session
 if (!isset($_SESSION['login'])) {
     header("location: ../owner_login.php");
     exit();
@@ -19,14 +18,12 @@ if (isset($_POST['addTenantSubmit'])) {
     $tenantEmail = $_POST['tenantEmail'];
     $tenantPassword = $_POST['tenantPassword'];
 
-    // Check if the apartment number already exists in the tenants table for the same owner
     $checkQuery = "SELECT * FROM tenants WHERE apartmentNumber = '$apartmentNumber' AND apartmentID = '$apartmentID'";
     $checkResult = mysqli_query($con, $checkQuery);
 
     if (mysqli_num_rows($checkResult) > 0) {
         echo "<script>alert('Apartment number already exists for this owner.');</script>";
     } else {
-        // Insert the tenant into the database
         $query = "INSERT INTO tenants (apartmentID, tenantName, tenantID, apartmentNumber, amountToBePaid, tenantEmail, tenantPassword)
                   VALUES ('$apartmentID', '$tenantName', '$tenantID', '$apartmentNumber', '$amountToBePaid', '$tenantEmail', '$tenantPassword')";
 
@@ -50,7 +47,6 @@ if (isset($_POST['addTenantSubmit'])) {
 </head>
 <body>
     <style>
-        /* CSS for add_tenant.php */
 
 body {
     font-family: Arial, sans-serif;
@@ -152,7 +148,6 @@ button[type="submit"]:hover {
     background-color: #00cc99;
 }
 
-/* Add more CSS rules here to style the form as needed */
 
     </style>
     <header>
