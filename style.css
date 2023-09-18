@@ -15,7 +15,7 @@
   --text-color: #fff;
   --bg-color: #fff;
 
-  --box-shadow: 2px 2px 18px rgb(14 52 54 / 15%);
+  --box-shadow: 2px 2px 18px rgba(0, 0, 0, 0.15);
 }
 
 img {

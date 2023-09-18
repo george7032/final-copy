@@ -1,34 +1,45 @@
 <?php
+session_start();
 
-include ("dbcon.php");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Include your database connection here
+    include("dbcon.php");
 
-if(isset($_POST["ownerSubmit"])){
-    $ownerEmail = $_POST ["ownerEmail"];
-    $ownerPassword = $_POST ["ownerPassword"]; 
-    $result = mysqli_query($con, "SELECT * FROM owners WHERE ownerEmail = '$ownerEmail' or ownerPassword = '$ownerPassword'");
-    $row =(mysqli_fetch_assoc($result));
-    if(mysqli_num_rows($result) > 0){
-        if($ownerPassword == $row["ownerPassword"]){
-            $_SESSION["login"] = true;
-            $_SESSION["id"] = $row["id"];
-            header("location: dashboard/owner_dashboard.php");
-        }
-        else
-        {
-            echo
-            "<script> alert('Wrong password'); </script>";
-        }
+    $ownerEmail = $_POST["ownerEmail"];
+    $ownerPassword = $_POST["ownerPassword"];
+
+    // Perform input validation here if needed
+
+    // Query the database to check owner credentials
+    $query = "SELECT * FROM owners WHERE ownerEmail = ? AND ownerPassword = ?";
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("ss", $ownerEmail, $ownerPassword);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        // Owner authentication successful
+        $row = $result->fetch_assoc();
+
+        // Store owner information in the session
+        $_SESSION["login"] = true;
+        $_SESSION["ownerID"] = $row["ownerID"];
+        $_SESSION["apartmentID"] = $row["apartmentID"];
+        $_SESSION["ownerName"] = $row["ownerName"];
+
+        // Redirect to the owner dashboard or any other desired page
+        header("location: dashboard/owner_dashboard.php");
+        exit();
+    } else {
+        // Authentication failed
+        $error_message = "Invalid credentials. Please try again.";
     }
-    else{
-        echo
-            "<script>alert ('User Not Registered');</script>";  
-    }
 
+    // Close the database connection
+    $stmt->close();
+    $con->close();
 }
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,24 +54,28 @@ if(isset($_POST["ownerSubmit"])){
     <header>
         <div class="nav container">
             <a href="index.php" class="logo"><i class='bx bx-home'></i>Tenants Management System </a>
-           
-            <a href="index.php" class="btn">Home</a>
         </div>
-
     </header>
+
     <div class="login container">
         <div class="login-container">
             <h2>Welcome Back</h2>
+            <?php
+            if (isset($error_message)) {
+                echo "<p class='error-message'>$error_message</p>";
+            }
+            ?>
             <form action="" method="post">
                 <span>Email Address</span>
-                <input type="text" name="ownerEmail" id="" placeholder="owneremail@gmail.com" required>                
-                <span>Enter your password</span>
-                <input type="password" name="ownerPassword" id="" placeholder="password" required>
-                <button type="submit" name="ownerSubmit">Login</button>                   
-                <p>Don't Have An Account!</p>
+                <input type="text" name="ownerEmail" id="ownerEmail" placeholder="owneremail@gmail.com" required>
+                <span>Password</span>
+                <input type="password" name="ownerPassword" id="ownerPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
             </form>
+            <p>Don't Have An Account?</p>
             <a href="startmembership.php" class="btn">Sign Up</a>
         </div>
     </div>
-    
-<?php include('includes/footer.php'); ?>
+
+</body>
+</html>
