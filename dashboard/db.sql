@@ -35,3 +35,19 @@ CREATE TABLE payments (
     description VARCHAR(255),
     FOREIGN KEY (tenantID) REFERENCES tenants(tenantID) ON DELETE CASCADE
 );
+
+CREATE TABLE maintenance_requests (
+    requestID INT AUTO_INCREMENT PRIMARY KEY,
+    tenantID INT NOT NULL,
+    complaint TEXT NOT NULL,
+    requestDate DATE NOT NULL,
+    FOREIGN KEY (tenantID) REFERENCES tenants(tenantID) ON DELETE CASCADE
+);
+
+CREATE TABLE chat_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    message TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

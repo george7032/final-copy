@@ -1,13 +1,10 @@
 <?php
 session_start();
-include('dbcon.php'); // Include your database connection
+include('dbcon.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get input data
     $apartmentNumber = $_POST['apartmentNumber'];
     $tenantPassword = $_POST['tenantPassword'];
-
-    // Query the database to check if the credentials are valid
     $query = "SELECT * FROM tenants WHERE apartmentNumber = ? AND tenantPassword = ?";
     $stmt = $con->prepare($query);
     $stmt->bind_param("ss", $apartmentNumber, $tenantPassword);
@@ -15,19 +12,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
-        // Tenant authentication successful
         $row = $result->fetch_assoc();
-
-        // Store tenant information in the session
         $_SESSION['tenantID'] = $row['tenantID'];
         $_SESSION['apartmentNumber'] = $row['apartmentNumber'];
         $_SESSION['tenantName'] = $row['tenantName'];
 
-        // Redirect to the tenant dashboard
         header("location: tenant_dashboard.php");
         exit();
     } else {
-        // Authentication failed
         echo "<script>alert('Invalid credentials. Please try again.');</script>";
     }
 }

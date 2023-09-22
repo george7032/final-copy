@@ -1,5 +1,5 @@
 <?php
-include("../gpt1/dbcon.php");
+include("../project/dbcon.php");
 session_start();
 $tenantID = $_SESSION["tenantID"];
 $query = "SELECT * FROM tenants WHERE tenantID = ?";
@@ -175,8 +175,9 @@ if (!empty($row)) {
             <a href="#" class="logo"><i class='bx bx-home'></i>Tenant Management System</a>
             <ul class="navbar">
                 <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="../dashboard/payment">Payments</a></li>
-                <li><a href="#maintenance">Maintenance</a></li>
+                <li><a href="#">Payments</a></li>
+                <li><a href="../project/maintenance_request.php">Maintenance</a></li>
+           <!--     <li><a href="../project/tenant_chat.php">Chat</a></li> -->
                 <li><a href="../gpt1/logout.php">Logout</a></li>
             </ul>
         </div>

@@ -1,4 +1,5 @@
 <?php include('includes/header.php');?>
+
 <br><br>    
     <section class="home container" id="home">
         <div class="home-text">
@@ -6,12 +7,10 @@
             <a href="tenant_login.php" class="btn">Tenant Login</a>
         </div>
     </section>
-
+<br><br>
 
     <section class="about container" id="about">
-        <div class="about-img">
-            <img src="img/about.jpg" alt="">
-        </div>
+
 
         <div class="about-text">
             <span><b>About Us</b></span>
@@ -22,6 +21,7 @@
             <a href="#" class="btn">Learn More</a>
         </div>
     </section>
+    <br><br><br>
     <section class="membership container" id="startMembership">
      
         <div class="box">
@@ -32,6 +32,8 @@
         </div>
        
     </section>
+
+    <br><br>
     <section class="newsletter container">
         <h2>Have Question in mind? <br>Let us help you</h2>
         <form action="">
@@ -39,6 +41,7 @@
             <a href="mailto:kimani7032@gmail.com"><input type="submit" value="Send" class="btn"></i>
         </form>
     </section>
+    <br><br>
    
 
 <?php include('includes/footer.php');?>

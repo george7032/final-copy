@@ -31,99 +31,118 @@ $stmt->close();
 </head>
 <body>
     <style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
 
-header {
-    background-color: #00563F;
-    color: white;
-    padding: 20px 0;
-}
+        header {
+            background-color: #00563F;
+            color: white;
+            padding: 20px 0;
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-.dashboard,
-.payments,
-.maintenance,
-.tenants {
-    padding: 50px 0;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .dashboard,
+        .payments,
+        .maintenance,
+        .tenants {
+            padding: 50px 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
 
-.dashboard h1,
-.payments h1,
-.maintenance h1,
-.tenants h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    text-align: center;
-}
+        .dashboard h1,
+        .payments h1,
+        .maintenance h1,
+        .tenants h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-.dashboard h2,
-.payments h2,
-.maintenance h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
+        .dashboard h2,
+        .payments h2,
+        .maintenance h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
 
-.btn {
-    display: inline-block;
-    background-color: #00563F;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    margin-top: 10px;
-}
+        .btn {
+            display: inline-block;
+            background-color: #00563F;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
 
-.btn:hover {
-    background-color: #00cc99;
-}
+        .btn:hover {
+            background-color: #00cc99;
+        }
 
 
 
     </style>
-    <?php include('../dashboard/header1.php')?>
+    <header>
+            <div class="nav container">
+                <a href="../index.php" class="logo"><i class='bx bx-home'></i>Tenants Management System</a>
+                <ul class="navbar">
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="../dashboard/payments.php">Payments</a></li>
+                    <li><a href="../view_maintenance_request.php">Maintenance</a></li>
+                    <li><a href="../dashboard/tenants.php">Tenants</a></li>
+                   <!-- <li><a href="../owner_chat.php">Chat</a></li> -->
+                    <li><a href="../logout.php">Logout</a></li>
+                </ul>
+            </div>
+    </header>
+
+    <section class="tenants container">
+        <h1>Tenants</h1>
+        <a href="add_tenant.php" class="btn">Add Tenant</a> 
+    </section>
 
     <section class="dashboard container" id="dashboard">
-        <h1>Dashboard</h1>
+    <h1>Dashboard</h1>
+    <div class="property-info">
+        <!-- Property information goes here -->
+    </div>
 
-        <div class="property-info">
-            <h2>Property Information</h2>
-        </div>
-        <div class="rent-summary">
-            <h2>Rent Summary</h2>
-        </div>
+    <!-- Add this section to display the total payments -->
+    <section class="total-payments container">
+        <h2>Total Payments Made</h2>
+        <?php
+        // Calculate the total payments made by tenants
+        $query = "SELECT SUM(amount) AS totalPayments FROM payments WHERE tenantID IN (SELECT tenantID FROM tenants WHERE apartmentID = ?)";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("i", $_SESSION['apartmentID']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $totalPayments = $row['totalPayments'];
+        ?>
+        <p>Total payments made by tenants: $<?php echo number_format($totalPayments, 2); ?></p>
     </section>
+</section>
 
-    <section class="payments container">
-        <h1>Payments</h1>
-    </section>
 
     <section class="maintenance container">
         <h1>Maintenance</h1>
     </section>
 
-    <section class="tenants container">
-        <h1>Tenants</h1>
-        <a href="add_tenant.php" class="btn">Add Tenant</a> 
-        <ul>
-            <li><a href="tenant_profile.php?id=1">Tenant 1</a></li>
-            <li><a href="tenant_profile.php?id=2">Tenant 2</a></li>
-        </ul>
-    </section>
+
 <?php include ('../includes/footer.php');?>
 </body>
 </html>
